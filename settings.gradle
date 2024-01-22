@@ -11,3 +11,4 @@ rootProject.name = 'system-design-playground'
 
 include 'support:logging'
 include 'storage:db-core'
+include 'core:core-api'
