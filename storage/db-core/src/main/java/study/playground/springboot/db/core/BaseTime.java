@@ -1,17 +1,14 @@
 package study.playground.springboot.db.core;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.MappedSuperclass;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 
 @MappedSuperclass
-public abstract class BaseEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public abstract class BaseTime {
 
     @CreationTimestamp
     @Column
@@ -20,10 +17,6 @@ public abstract class BaseEntity {
     @UpdateTimestamp
     @Column
     private LocalDateTime updatedAt;
-
-    public Long getId() {
-        return id;
-    }
 
     public LocalDateTime getCreatedAt() {
         return createdAt;
