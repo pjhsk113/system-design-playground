@@ -1,6 +1,5 @@
 package study.playground.springboot.core.api.adapter;
 
-import com.settlementsystem.infrastructure.notification.SendNotification;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
@@ -15,6 +14,7 @@ import study.playground.springboot.db.core.entity.SettlementRepaymentEntity;
 import study.playground.springboot.db.core.repository.NotificationRepository;
 import study.playground.springboot.db.core.repository.SettlementRepaymentRepository;
 import study.playground.springboot.db.core.repository.SettlementRepository;
+import study.playground.springboot.notification.SendNotification;
 
 import java.util.ArrayList;
 import java.util.List;
