@@ -1,12 +1,11 @@
 package study.playground.springboot.db.core.entity;
 
+import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import study.playground.springboot.db.core.BaseTime;
-
-import javax.persistence.*;
 
 @Entity
 @Table(name = "user")
