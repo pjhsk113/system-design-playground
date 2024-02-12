@@ -1,9 +1,6 @@
 package study.playground.springboot.core.api.controller.v1.response;
 
 import com.fasterxml.jackson.annotation.JsonRootName;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
 import study.playground.springboot.core.api.service.model.SettlementReceiveHistoryCommand;
 
 import java.util.List;
@@ -11,7 +8,6 @@ import java.util.List;
 import static java.util.stream.Collectors.toList;
 
 @JsonRootName("settlementReceiveHistory")
-@Getter
 public class SettlementReceiveHistoryResponse {
     private List<SettlementResponse> responses;
 
@@ -31,8 +27,10 @@ public class SettlementReceiveHistoryResponse {
                 .collect(toList());
     }
 
-    @Getter
-    @AllArgsConstructor(access = AccessLevel.PRIVATE)
+    public List<SettlementResponse> getResponses() {
+        return responses;
+    }
+
     private static class SettlementResponse {
         private Long repaymentId;
         private Long recipientId;
@@ -41,6 +39,16 @@ public class SettlementReceiveHistoryResponse {
         private long repaymentAmount;
         private long remainAmount;
         private String settlementStatus;
+
+        private SettlementResponse(Long repaymentId, Long recipientId, Long senderId, long settlementAmount, long repaymentAmount, long remainAmount, String settlementStatus) {
+            this.repaymentId = repaymentId;
+            this.recipientId = recipientId;
+            this.senderId = senderId;
+            this.settlementAmount = settlementAmount;
+            this.repaymentAmount = repaymentAmount;
+            this.remainAmount = remainAmount;
+            this.settlementStatus = settlementStatus;
+        }
 
         public static SettlementResponse from(SettlementReceiveHistoryCommand.SettlementReceiveHistory receiveHistory) {
             return new SettlementResponse(
@@ -52,6 +60,34 @@ public class SettlementReceiveHistoryResponse {
                     receiveHistory.getRemainAmount().getAmount(),
                     receiveHistory.getSettlementStatus().getMessage()
             );
+        }
+
+        public Long getRepaymentId() {
+            return repaymentId;
+        }
+
+        public Long getRecipientId() {
+            return recipientId;
+        }
+
+        public Long getSenderId() {
+            return senderId;
+        }
+
+        public long getSettlementAmount() {
+            return settlementAmount;
+        }
+
+        public long getRepaymentAmount() {
+            return repaymentAmount;
+        }
+
+        public long getRemainAmount() {
+            return remainAmount;
+        }
+
+        public String getSettlementStatus() {
+            return settlementStatus;
         }
     }
 }

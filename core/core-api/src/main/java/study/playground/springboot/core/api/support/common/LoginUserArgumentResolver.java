@@ -1,6 +1,5 @@
 package study.playground.springboot.core.api.support.common;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.core.MethodParameter;
 import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
@@ -8,10 +7,13 @@ import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 import study.playground.springboot.db.core.repository.UserRepository;
 
-@RequiredArgsConstructor
 public class LoginUserArgumentResolver implements HandlerMethodArgumentResolver {
     private static final String LOGIN_USER_HEADER = "X-USER-ID";
     private final UserRepository userRepository;
+
+    public LoginUserArgumentResolver(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Override
     public boolean supportsParameter(MethodParameter parameter) {

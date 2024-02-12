@@ -1,16 +1,16 @@
 package study.playground.springboot.core.api.domain;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Repayments {
     private List<Repayment> repayments;
+
+    private Repayments(List<Repayment> repayments) {
+        this.repayments = repayments;
+    }
 
     public static Repayments from(List<Repayment> repayments) {
         return new Repayments(repayments);
@@ -50,7 +50,7 @@ public class Repayments {
 
     public Repayment getOwnerUserRepayment() {
         return repayments.stream()
-                .filter(repayment -> repayment.isSettlementOwner())
+                .filter(Repayment::isSettlementOwner)
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("정산 대상자가 아닙니다."));
     }

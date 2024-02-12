@@ -1,28 +1,34 @@
 package study.playground.springboot.core.api.domain;
 
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
-import lombok.Value;
-
 import java.time.LocalDateTime;
 
-@Value
-@RequiredArgsConstructor
 public class NotificationEvent {
-    @Getter
     private NotificationEventId id;
 
-    @Getter
     private final LocalDateTime remindDatetime;
 
-    public NotificationEvent(@NonNull LocalDateTime remindDatetime) {
+    public NotificationEvent(LocalDateTime remindDatetime) {
         this.id = null;
         this.remindDatetime = remindDatetime;
     }
 
-    @Value
+    public NotificationEventId getId() {
+        return id;
+    }
+
+    public LocalDateTime getRemindDatetime() {
+        return remindDatetime;
+    }
+
     public static class NotificationEventId {
         private Long value;
+
+        public NotificationEventId(Long value) {
+            this.value = value;
+        }
+
+        public Long getValue() {
+            return value;
+        }
     }
 }

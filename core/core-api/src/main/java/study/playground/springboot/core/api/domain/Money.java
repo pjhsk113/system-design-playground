@@ -1,12 +1,13 @@
 package study.playground.springboot.core.api.domain;
 
-import lombok.Value;
-
-@Value
 public class Money {
     public static final Money ZERO = Money.of(0L);
 
     private final long amount;
+
+    private Money(long amount) {
+        this.amount = amount;
+    }
 
     public static Money of(long value) {
         return new Money(value);
@@ -54,5 +55,9 @@ public class Money {
 
     public boolean isGreaterThan(Money money){
         return this.amount > money.amount;
+    }
+
+    public long getAmount() {
+        return amount;
     }
 }

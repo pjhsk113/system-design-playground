@@ -1,21 +1,26 @@
 package study.playground.springboot.core.api.domain;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Value;
-
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class User {
 
-    @Getter
     private final UserId id;
 
-    @Getter
     private final Money balance;
+
+    private User(UserId id, Money balance) {
+        this.id = id;
+        this.balance = balance;
+    }
 
     public static User withId(UserId userId, Money balance) {
         return new User(userId, balance);
+    }
+
+    public UserId getId() {
+        return id;
+    }
+
+    public Money getBalance() {
+        return balance;
     }
 
     public boolean isEnoughBalance(Money amount) {
@@ -37,8 +42,15 @@ public class User {
         return balance.minus(amount).getAmount() >= 0L;
     }
 
-    @Value
     public static class UserId {
         private Long value;
+
+        public UserId(Long value) {
+            this.value = value;
+        }
+
+        public Long getValue() {
+            return value;
+        }
     }
 }

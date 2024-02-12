@@ -1,17 +1,10 @@
 package study.playground.springboot.db.core.entity;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import study.playground.springboot.db.core.BaseTime;
 
 @Entity
 @Table(name = "settlement_repayment")
-@Data
-@AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class SettlementRepaymentEntity extends BaseTime {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,4 +29,43 @@ public class SettlementRepaymentEntity extends BaseTime {
     @Column
     private String settlementStatus;
 
+    protected SettlementRepaymentEntity() { }
+
+    public SettlementRepaymentEntity(Long id, Long settlementId, Long ownerUserId, Long targetUserId, long settlementAmount, long repaymentAmount, String settlementStatus) {
+        this.id = id;
+        this.settlementId = settlementId;
+        this.ownerUserId = ownerUserId;
+        this.targetUserId = targetUserId;
+        this.settlementAmount = settlementAmount;
+        this.repaymentAmount = repaymentAmount;
+        this.settlementStatus = settlementStatus;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public Long getSettlementId() {
+        return settlementId;
+    }
+
+    public Long getOwnerUserId() {
+        return ownerUserId;
+    }
+
+    public Long getTargetUserId() {
+        return targetUserId;
+    }
+
+    public long getSettlementAmount() {
+        return settlementAmount;
+    }
+
+    public long getRepaymentAmount() {
+        return repaymentAmount;
+    }
+
+    public String getSettlementStatus() {
+        return settlementStatus;
+    }
 }

@@ -1,6 +1,5 @@
 package study.playground.springboot.core.api.service;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import study.playground.springboot.core.api.adapter.LoadSettlementPort;
@@ -17,12 +16,18 @@ import study.playground.springboot.core.api.support.exception.SettlementProcessi
 
 @Service
 @Transactional
-@RequiredArgsConstructor
 public class SendMoneyService implements SendMoneyUseCase {
     private final LoadUserPort loadUserPort;
     private final UserStatePort userStatePort;
     private final LoadSettlementPort loadSettlementPort;
     private final SettlementStatePort settlementStatePort;
+
+    public SendMoneyService(LoadUserPort loadUserPort, UserStatePort userStatePort, LoadSettlementPort loadSettlementPort, SettlementStatePort settlementStatePort) {
+        this.loadUserPort = loadUserPort;
+        this.userStatePort = userStatePort;
+        this.loadSettlementPort = loadSettlementPort;
+        this.settlementStatePort = settlementStatePort;
+    }
 
     @Override
     public boolean sendMoney(Long requestUserId, SendMoneyCommand command) {

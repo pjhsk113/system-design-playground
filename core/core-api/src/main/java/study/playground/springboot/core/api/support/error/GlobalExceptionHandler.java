@@ -1,6 +1,7 @@
 package study.playground.springboot.core.api.support.error;
 
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindException;
@@ -12,9 +13,9 @@ import study.playground.springboot.core.api.support.error.exception.BusinessExce
 import study.playground.springboot.core.api.support.error.exception.ErrorCode;
 import study.playground.springboot.core.api.support.error.exception.ExternalException;
 
-@Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+    private final Logger log = LoggerFactory.getLogger(getClass());
     /**
      *  javax.validation 입력 값 검증 실패 시 발생
      *  @RequestBody or @RequestPart 에서 주로 발생

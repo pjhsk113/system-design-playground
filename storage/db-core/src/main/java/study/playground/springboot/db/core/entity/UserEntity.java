@@ -1,17 +1,10 @@
 package study.playground.springboot.db.core.entity;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import study.playground.springboot.db.core.BaseTime;
 
 @Entity
 @Table(name = "user")
-@Data
-@AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class UserEntity extends BaseTime {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,4 +13,19 @@ public class UserEntity extends BaseTime {
 
     @Column
     private long balance;
+
+    protected UserEntity() { }
+
+    public UserEntity(Long id, long balance) {
+        this.id = id;
+        this.balance = balance;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public long getBalance() {
+        return balance;
+    }
 }

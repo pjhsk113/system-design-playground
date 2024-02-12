@@ -1,14 +1,9 @@
 package study.playground.springboot.core.api.support.error;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 import org.springframework.validation.BindingResult;
 import study.playground.springboot.core.api.support.error.exception.ErrorCode;
 
-@Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ErrorResponse {
 
     private int status;
@@ -16,6 +11,8 @@ public class ErrorResponse {
     private String code;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String detailMessage;
+
+    protected ErrorResponse() { }
 
     private ErrorResponse(final ErrorCode code) {
         this.status = code.getStatus();
@@ -40,5 +37,21 @@ public class ErrorResponse {
 
     public static ErrorResponse of(final ErrorCode code) {
         return new ErrorResponse(code);
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public String getDetailMessage() {
+        return detailMessage;
     }
 }

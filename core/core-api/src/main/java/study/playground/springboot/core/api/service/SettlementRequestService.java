@@ -1,6 +1,5 @@
 package study.playground.springboot.core.api.service;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import study.playground.springboot.core.api.adapter.LoadUserPort;
@@ -17,10 +16,14 @@ import java.util.List;
 
 @Service
 @Transactional
-@RequiredArgsConstructor
 public class SettlementRequestService implements SettlementRequestUseCase {
     private final LoadUserPort loadUserPort;
     private final SettlementStatePort settlementStatePort;
+
+    public SettlementRequestService(LoadUserPort loadUserPort, SettlementStatePort settlementStatePort) {
+        this.loadUserPort = loadUserPort;
+        this.settlementStatePort = settlementStatePort;
+    }
 
     @Override
     public boolean settlementRequest(Long requestUserId, SettlementRequestCommand command) {

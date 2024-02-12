@@ -1,8 +1,5 @@
 package study.playground.springboot.core.api.service.model;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
 import study.playground.springboot.core.api.domain.Money;
 import study.playground.springboot.core.api.domain.Settlement;
 import study.playground.springboot.core.api.domain.SettlementStatus;
@@ -11,7 +8,6 @@ import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 
-@Getter
 public class SettlementRequestHistoryCommand {
     private List<SettlementRequestHistory> settlementHistories;
 
@@ -29,12 +25,20 @@ public class SettlementRequestHistoryCommand {
                 .collect(toList());
     }
 
-    @Getter
-    @AllArgsConstructor(access = AccessLevel.PRIVATE)
+    public List<SettlementRequestHistory> getSettlementHistories() {
+        return settlementHistories;
+    }
+
     public static class SettlementRequestHistory {
         private Settlement.SettlementId settlementId;
         private Money totalSettlementAmount;
         private SettlementStatus settlementStatus;
+
+        private SettlementRequestHistory(Settlement.SettlementId settlementId, Money totalSettlementAmount, SettlementStatus settlementStatus) {
+            this.settlementId = settlementId;
+            this.totalSettlementAmount = totalSettlementAmount;
+            this.settlementStatus = settlementStatus;
+        }
 
         public static SettlementRequestHistory from(Settlement settlement) {
             return new SettlementRequestHistory(
@@ -42,6 +46,18 @@ public class SettlementRequestHistoryCommand {
                     settlement.getTotalSettlementAmount(),
                     settlement.getSettlementStatus()
             );
+        }
+
+        public Settlement.SettlementId getSettlementId() {
+            return settlementId;
+        }
+
+        public Money getTotalSettlementAmount() {
+            return totalSettlementAmount;
+        }
+
+        public SettlementStatus getSettlementStatus() {
+            return settlementStatus;
         }
     }
 

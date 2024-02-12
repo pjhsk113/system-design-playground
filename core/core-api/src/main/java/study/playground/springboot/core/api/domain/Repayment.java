@@ -1,39 +1,54 @@
 package study.playground.springboot.core.api.domain;
 
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
-import lombok.Value;
-
-@Value
-@RequiredArgsConstructor
 public class Repayment {
 
-    @Getter
     private RepaymentId id;
 
-    @Getter
     private final User.UserId ownerUserId;
 
-    @Getter
     private final User.UserId targetUserId;
 
-    @Getter
     private final Money settlementAmount;
 
-    @Getter
     private final Money repaymentAmount;
 
-    public Repayment(
-            @NonNull User.UserId ownerUserId,
-            @NonNull User.UserId targetUserId,
-            @NonNull Money settlementAmount,
-            @NonNull Money repaymentAmount) {
+    public Repayment(User.UserId ownerUserId,
+                     User.UserId targetUserId,
+                     Money settlementAmount,
+                     Money repaymentAmount) {
         this.id = null;
         this.ownerUserId = ownerUserId;
         this.targetUserId = targetUserId;
         this.settlementAmount = settlementAmount;
         this.repaymentAmount = repaymentAmount;
+    }
+
+    public Repayment(RepaymentId id, User.UserId ownerUserId, User.UserId targetUserId, Money settlementAmount, Money repaymentAmount) {
+        this.id = id;
+        this.ownerUserId = ownerUserId;
+        this.targetUserId = targetUserId;
+        this.settlementAmount = settlementAmount;
+        this.repaymentAmount = repaymentAmount;
+    }
+
+    public RepaymentId getId() {
+        return id;
+    }
+
+    public User.UserId getOwnerUserId() {
+        return ownerUserId;
+    }
+
+    public User.UserId getTargetUserId() {
+        return targetUserId;
+    }
+
+    public Money getSettlementAmount() {
+        return settlementAmount;
+    }
+
+    public Money getRepaymentAmount() {
+        return repaymentAmount;
     }
 
     public boolean isSettlementOwner() {
@@ -75,8 +90,15 @@ public class Repayment {
         );
     }
 
-    @Value
     public static class RepaymentId {
         private Long value;
+
+        public RepaymentId(Long value) {
+            this.value = value;
+        }
+
+        public Long getValue() {
+            return value;
+        }
     }
 }

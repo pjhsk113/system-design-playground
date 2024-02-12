@@ -1,6 +1,5 @@
 package study.playground.springboot.core.api.service;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import study.playground.springboot.core.api.adapter.LoadSettlementPort;
@@ -15,10 +14,14 @@ import java.util.List;
 
 @Service
 @Transactional
-@RequiredArgsConstructor
 public class GetSettlementHistoryService implements GetSettlementHistoryUseCase {
     private final LoadUserPort loadUserPort;
     private final LoadSettlementPort loadSettlementPort;
+
+    public GetSettlementHistoryService(LoadUserPort loadUserPort, LoadSettlementPort loadSettlementPort) {
+        this.loadUserPort = loadUserPort;
+        this.loadSettlementPort = loadSettlementPort;
+    }
 
     @Override
     public SettlementRequestHistoryCommand getSettlementRequestHistory(Long requestUserId) {

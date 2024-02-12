@@ -1,8 +1,5 @@
 package study.playground.springboot.core.api.domain;
 
-import lombok.Getter;
-
-@Getter
 public enum SettlementStatus {
     UNSETTLED("미정산"),
     PROCEED("정산중"),
@@ -12,5 +9,9 @@ public enum SettlementStatus {
 
     SettlementStatus(String message) {
         this.message = message;
+    }
+
+    public String getMessage() {
+        return message;
     }
 }

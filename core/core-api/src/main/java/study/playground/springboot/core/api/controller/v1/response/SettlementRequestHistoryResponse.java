@@ -1,8 +1,6 @@
 package study.playground.springboot.core.api.controller.v1.response;
 
 import com.fasterxml.jackson.annotation.JsonRootName;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import study.playground.springboot.core.api.service.model.SettlementRequestHistoryCommand;
 
@@ -31,12 +29,16 @@ public class SettlementRequestHistoryResponse {
                 .collect(toList());
     }
 
-    @Getter
-    @AllArgsConstructor(access = AccessLevel.PRIVATE)
     private static class SettlementResponse {
         private Long settlementId;
         private long totalSettlementAmount;
         private String settlementStatus;
+
+        private SettlementResponse(Long settlementId, long totalSettlementAmount, String settlementStatus) {
+            this.settlementId = settlementId;
+            this.totalSettlementAmount = totalSettlementAmount;
+            this.settlementStatus = settlementStatus;
+        }
 
         public static SettlementResponse from(SettlementRequestHistoryCommand.SettlementRequestHistory requestHistory) {
             return new SettlementResponse(
@@ -44,6 +46,18 @@ public class SettlementRequestHistoryResponse {
                     requestHistory.getTotalSettlementAmount().getAmount(),
                     requestHistory.getSettlementStatus().getMessage()
             );
+        }
+
+        public Long getSettlementId() {
+            return settlementId;
+        }
+
+        public long getTotalSettlementAmount() {
+            return totalSettlementAmount;
+        }
+
+        public String getSettlementStatus() {
+            return settlementStatus;
         }
     }
 

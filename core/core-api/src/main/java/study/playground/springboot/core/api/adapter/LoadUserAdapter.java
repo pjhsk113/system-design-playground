@@ -1,7 +1,6 @@
 package study.playground.springboot.core.api.adapter;
 
 import jakarta.persistence.EntityNotFoundException;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import study.playground.springboot.core.api.domain.Money;
@@ -11,13 +10,14 @@ import study.playground.springboot.db.core.repository.UserRepository;
 
 import java.util.List;
 
-import static java.util.stream.Collectors.toList;
-
 @Component
-@RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class LoadUserAdapter implements LoadUserPort {
     private final UserRepository userRepository;
+
+    public LoadUserAdapter(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Override
     public User loadUser(Long userId) {
@@ -37,6 +37,6 @@ public class LoadUserAdapter implements LoadUserPort {
                 .map(userEntity -> User.withId(
                         new User.UserId(userEntity.getId()),
                         Money.of(userEntity.getBalance())))
-                .collect(toList());
+                .toList();
     }
 }

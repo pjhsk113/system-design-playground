@@ -1,7 +1,6 @@
 package study.playground.springboot.core.api.adapter;
 
 import jakarta.persistence.EntityNotFoundException;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import study.playground.springboot.core.api.domain.Repayment;
@@ -17,12 +16,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-@RequiredArgsConstructor
 @Transactional
 public class SettlementPersistenceAdapter implements SettlementStatePort, LoadSettlementPort {
     private final SettlementMapper settlementMapper;
     private final SettlementRepository settlementRepository;
     private final SettlementRepaymentRepository settlementRepaymentRepository;
+
+    public SettlementPersistenceAdapter(SettlementMapper settlementMapper, SettlementRepository settlementRepository, SettlementRepaymentRepository settlementRepaymentRepository) {
+        this.settlementMapper = settlementMapper;
+        this.settlementRepository = settlementRepository;
+        this.settlementRepaymentRepository = settlementRepaymentRepository;
+    }
 
     @Override
     public void createSettlement(Settlement settlement) {

@@ -1,6 +1,5 @@
 package study.playground.springboot.core.api.adapter;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
@@ -18,19 +17,22 @@ import study.playground.springboot.notification.SendNotification;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-
-import static java.util.stream.Collectors.toList;
 
 @Component
 @Async("asyncExecutor")
-@RequiredArgsConstructor
 @Transactional(propagation = Propagation.REQUIRES_NEW)
 public class NotificationEventHandler {
     private final NotificationRepository notificationRepository;
     private final SettlementRepository settlementRepository;
     private final SettlementRepaymentRepository settlementRepaymentRepository;
     private final SendNotification sendNotification;
+
+    public NotificationEventHandler(NotificationRepository notificationRepository, SettlementRepository settlementRepository, SettlementRepaymentRepository settlementRepaymentRepository, SendNotification sendNotification) {
+        this.notificationRepository = notificationRepository;
+        this.settlementRepository = settlementRepository;
+        this.settlementRepaymentRepository = settlementRepaymentRepository;
+        this.sendNotification = sendNotification;
+    }
 
     @EventListener
     public void handleNotificationEvent(NotificationEvent notificationEvent) {
@@ -81,13 +83,13 @@ public class NotificationEventHandler {
     private List<Long> mapToIds(List<SettlementEntity> settlementEntities) {
         return settlementEntities.stream()
                 .map(SettlementEntity::getId)
-                .collect(toList());
+                .toList();
     }
 
     private List<String> convertToContents(List<SettlementRepaymentEntity> settlementRepaymentEntities) {
         return settlementRepaymentEntities.stream()
                 .map(entity -> NotificationType.REMIND.getMessage())
-                .collect(Collectors.toList());
+                .toList();
 
     }
 
