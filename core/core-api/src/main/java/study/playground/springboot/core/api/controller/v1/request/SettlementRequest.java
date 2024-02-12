@@ -4,14 +4,10 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 import study.playground.springboot.core.api.service.model.SettlementRequestCommand;
 
 import java.util.List;
 
-@Getter
-@NoArgsConstructor
 public class SettlementRequest {
 
     @Size(max = 50, min = 2)
@@ -25,11 +21,25 @@ public class SettlementRequest {
             message = "날짜는 30분 단위로 입력 가능합니다.")
     private String remindDateTime;
 
+    public SettlementRequest() { }
+
     public SettlementRequestCommand toCommand() {
         return SettlementRequestCommand.of(
                 targetUsers,
                 totalSettlementAmount,
                 remindDateTime
         );
+    }
+
+    public List<Long> getTargetUsers() {
+        return targetUsers;
+    }
+
+    public long getTotalSettlementAmount() {
+        return totalSettlementAmount;
+    }
+
+    public String getRemindDateTime() {
+        return remindDateTime;
     }
 }
