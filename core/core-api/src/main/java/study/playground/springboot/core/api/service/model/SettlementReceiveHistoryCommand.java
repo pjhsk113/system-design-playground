@@ -4,8 +4,6 @@ import study.playground.springboot.core.api.domain.*;
 
 import java.util.List;
 
-import static java.util.stream.Collectors.toList;
-
 public class SettlementReceiveHistoryCommand {
     private List<SettlementReceiveHistory> settlementHistories;
 
@@ -20,7 +18,7 @@ public class SettlementReceiveHistoryCommand {
     private static List<SettlementReceiveHistory> mapToCommand(List<Repayment> repayments) {
         return repayments.stream()
                 .map(SettlementReceiveHistory::from)
-                .collect(toList());
+                .toList();
     }
 
     public List<SettlementReceiveHistory> getSettlementHistories() {

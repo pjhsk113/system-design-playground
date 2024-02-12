@@ -5,8 +5,6 @@ import study.playground.springboot.core.api.service.model.SettlementReceiveHisto
 
 import java.util.List;
 
-import static java.util.stream.Collectors.toList;
-
 @JsonRootName("settlementReceiveHistory")
 public class SettlementReceiveHistoryResponse {
     private List<SettlementResponse> responses;
@@ -24,7 +22,7 @@ public class SettlementReceiveHistoryResponse {
     private static List<SettlementResponse> mapToResponse(List<SettlementReceiveHistoryCommand.SettlementReceiveHistory> receiveHistories) {
         return receiveHistories.stream()
                 .map(SettlementResponse::from)
-                .collect(toList());
+                .toList();
     }
 
     public List<SettlementResponse> getResponses() {

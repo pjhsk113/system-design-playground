@@ -3,7 +3,6 @@ package study.playground.springboot.core.api.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Repayments {
     private List<Repayment> repayments;
@@ -64,7 +63,7 @@ public class Repayments {
         List<Repayment> updateRepayments =
                 repayments.stream()
                         .map(repayment -> repayment.isSettlementTargetUser(updateRepayment.getTargetUserId()) ? updateRepayment : repayment)
-                        .collect(Collectors.toList());
+                        .toList();
 
         return Repayments.from(updateRepayments);
     }
