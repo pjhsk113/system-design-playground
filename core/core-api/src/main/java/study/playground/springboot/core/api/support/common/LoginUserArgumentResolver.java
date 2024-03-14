@@ -24,6 +24,10 @@ public class LoginUserArgumentResolver implements HandlerMethodArgumentResolver 
 
     @Override
     public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
+        String userId = webRequest.getHeader(LOGIN_USER_HEADER);
+        if (userId == null) {
+            throw new IllegalArgumentException("유저 정보가 없습니다.");
+        }
         Long loginUserId = Long.parseLong(webRequest.getHeader(LOGIN_USER_HEADER));
         return userRepository.findById(loginUserId)
                 .orElseThrow(() -> new IllegalArgumentException("올바르지 않은 유저 정보입니다."))
